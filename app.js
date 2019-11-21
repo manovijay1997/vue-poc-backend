@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 3001;
 const passport = require("passport");
+const morgan = require("morgan");
 require("./server/controllers/passportAuth");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json({ extended: false }));
@@ -32,6 +33,7 @@ mongoose.connect(db.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
 require("./server/routes/index.js")(app);
 require("./server/routes/passport-auth.js")(app);
 require("./server/routes/socialUser.js")(app);
