@@ -28,7 +28,6 @@ app.use(function(req, res, next) {
 });
 // <---------------------------connection--------------------------------->
 const db = require("./server/config/auth-key.js");
-console.log(db);
 mongoose.connect(db.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true

@@ -13,7 +13,6 @@ passport.use(
     },
     function(accessToken, refreshToken, profile, done) {
       if (profile) {
-        SocialAuthUser.socialAuthUser(accessToken, profile);
         let userData = {
           first_name: profile.name.familyName,
           last_name: profile.name.givenName,
