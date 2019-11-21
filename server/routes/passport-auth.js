@@ -20,7 +20,7 @@ module.exports = function(app) {
       res
         .status(301)
         .redirect(
-          `https://shielded-garden-86694.herokuapp.com/dashboard?id=${req.user.id}`
+          `https://vj-portfolio.herokuapp.com/dashboard?id=${req.user.id}`
         );
     }
   );

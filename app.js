@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 const app = express();
-
 const port = process.env.PORT || 3001;
 const passport = require("passport");
 require("./server/controllers/passportAuth");
@@ -28,13 +27,12 @@ app.use(function(req, res, next) {
   next();
 });
 // <---------------------------connection--------------------------------->
-mongoose.connect(
-  "mongodb+srv://vijay:vijay1997@vue-poc1-bnq3v.mongodb.net/test?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
-);
+const db = require("./server/config/auth-key.js");
+console.log(db);
+mongoose.connect(db.MONGODB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 require("./server/routes/index.js")(app);
 require("./server/routes/passport-auth.js")(app);
 require("./server/routes/socialUser.js")(app);
