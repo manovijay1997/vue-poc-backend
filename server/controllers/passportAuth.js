@@ -9,7 +9,8 @@ passport.use(
     {
       clientID: authKey.GOOGLE_CLIENT_ID,
       clientSecret: authKey.GOOGLE_CLIENT_SECRET,
-      callbackURL: authKey.CALLBACK_URL
+      callbackURL: authKey.CALLBACK_URL,
+      proxy: true
     },
     function(accessToken, refreshToken, profile, done) {
       if (profile) {

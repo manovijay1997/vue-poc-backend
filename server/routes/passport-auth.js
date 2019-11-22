@@ -10,17 +10,18 @@ module.exports = function(app) {
   app.get(
     "/auth/google",
     passport.authenticate("google", {
-      scope: ["https://www.googleapis.com/auth/plus.login"]
+      scope: ["profile", "email"]
     })
   );
   app.get(
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/" }),
     function(req, res) {
-      console.log("what is  red ", Number(req.user.id));
-      res
-        .status(301)
-        .redirect(`${url.REDIRECT_URL}/dashboard?id=${Number(req.user.id)}`);
+      // console.log("what is  red ", Number(req.user.id));
+      // res.status(200).redirect(`${url.REDIRECT_URL}/dashboard`);
+
+      res.writeHead(302, { Location: `${url.REDIRECT_URL}/dashboard` });
+      res.end();
     }
   );
 };

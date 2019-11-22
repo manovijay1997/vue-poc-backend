@@ -1,6 +1,7 @@
 const User_details = require("../module/userDetails.js");
 const Cryptr = require("cryptr");
 const cryptr = new Cryptr("myTotalySecretKey");
+const url = require("../config/auth-key.js");
 
 userLogin = (req, res) => {
   let data = req.body;
@@ -13,12 +14,14 @@ userLogin = (req, res) => {
         if (data.length !== 0) {
           // Encrypt user id using cryptr method
           const encryptedUserId = cryptr.encrypt(data[0] && data[0]._id);
+          console.log(encryptedUserId);
           res.json([
             {
               id: encryptedUserId,
               access: "granted"
             }
           ]);
+          console.log(url.REDIRECT_URL);
         } else if (data.length === 0) {
           // res.send("access_Denied")
           res.json([
