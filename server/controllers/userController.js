@@ -21,7 +21,6 @@ userLogin = (req, res) => {
               access: "granted"
             }
           ]);
-          console.log(url.REDIRECT_URL);
         } else if (data.length === 0) {
           // res.send("access_Denied")
           res.json([
@@ -64,4 +63,29 @@ userSignup = (req, res) => {
     }
   });
 };
-module.exports = { userLogin, userSignup };
+getUser = (req, res) => {
+  let userId = req.params ? req.params && req.params.userID : null;
+  var decryptedUserId = cryptr.decrypt(userId);
+  User_details.find({ _id: decryptedUserId }, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      const userData = data[0];
+      console.log(data);
+      res.json([
+        {
+          data: {
+            First_name: userData.first_name,
+            Last_name: userData.last_name,
+            Email: userData.email,
+            Phone: userData.phone
+          },
+          status: {
+            Status: 200
+          }
+        }
+      ]);
+    }
+  });
+};
+module.exports = { userLogin, userSignup, getUser };

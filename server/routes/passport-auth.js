@@ -17,11 +17,14 @@ module.exports = function(app) {
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/" }),
     function(req, res) {
-      // console.log("what is  red ", Number(req.user.id));
-      // res.status(200).redirect(`${url.REDIRECT_URL}/dashboard`);
-
-      res.writeHead(302, { Location: `${url.REDIRECT_URL}/dashboard` });
-      res.end();
+      console.log("what is  red ", Number(req.user.id));
+      res.redirect(`${url.REDIRECT_URL}/dashboard`);
+      // res.json([
+      //   {
+      //     data: "success"
+      //   }
+      // ]);
+      // res.status(301).redirect(`${url.REDIRECT_URL}/dashboard`);
     }
   );
 };
