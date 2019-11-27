@@ -3,8 +3,8 @@ const Cryptr = require("cryptr");
 const cryptr = new Cryptr("myTotalySecretKey");
 
 socialAuthUser = (req, res) => {
-  const userId = req.params ? req.params && req.params.id : null;
-  console.log("from social Auth", req.params);
+  var userId = req.params ? req.params && req.params.id : null;
+  userId = cryptr.decrypt(userId)
   SocialModel.find({ socialID: userId }, (err, data) => {
     if (data.length !== 0) {
       console.log(data);

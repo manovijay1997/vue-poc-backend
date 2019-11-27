@@ -6,7 +6,7 @@ const port = process.env.PORT || 3001;
 const url = require("../config/auth-key.js");
 
 console.log(port);
-module.exports = function(app) {
+module.exports = function (app) {
   app.get(
     "/auth/google",
     passport.authenticate("google", {
@@ -16,9 +16,10 @@ module.exports = function(app) {
   app.get(
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/" }),
-    function(req, res) {
+    function (req, res) {
       console.log("what is  red ", Number(req.user.id));
-      res.redirect(`${url.REDIRECT_URL}/dashboard`);
+      const userId = cryptr.encrypt(req.user.id)
+      res.redirect(`${url.REDIRECT_URL}/#/dashboard?id=${userId}`);
       // res.json([
       //   {
       //     data: "success"
