@@ -12,7 +12,7 @@ passport.use(
       callbackURL: authKey.CALLBACK_URL,
       proxy: true
     },
-    function(accessToken, refreshToken, profile, done) {
+    function (accessToken, refreshToken, profile, done) {
       if (profile) {
         let userData = {
           first_name: profile.name.familyName,
@@ -21,11 +21,11 @@ passport.use(
           provider: profile.provider,
           socialID: Number(profile.id)
         };
-        console.log("profile id ", Number(profile.id));
         SocialAuthUserDetails.find(
           { socialID: Number(profile.id) },
           (err, data) => {
-            if (data !== []) {
+            if (data.length !== 0) {
+              console.log("profile id ", data);
               return done(err, profile);
             } else {
               SocialAuthUserDetails.create(userData, err => {
@@ -42,12 +42,12 @@ passport.use(
     }
   )
 );
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
     done(err, user);
   });
 });
