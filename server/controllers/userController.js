@@ -75,8 +75,8 @@ getUser = (req, res) => {
       res.json([
         {
           data: {
-            First_name: userData.first_name,
-            Last_name: userData.last_name,
+            firstName: userData.first_name,
+            lastName: userData.last_name,
             Email: userData.email,
             Phone: userData.phone
           },

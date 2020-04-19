@@ -5,7 +5,7 @@ const cryptr = new Cryptr("myTotalySecretKey");
 const port = process.env.PORT || 3001;
 const url = require("../config/auth-key.js");
 
-console.log(port);
+// console.log(port);
 module.exports = function (app) {
   app.get(
     "/auth/google",
@@ -17,15 +17,8 @@ module.exports = function (app) {
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/" }),
     function (req, res) {
-      console.log("what is  red ", Number(req.user.id));
       const userId = cryptr.encrypt(req.user.id)
       res.redirect(`${url.REDIRECT_URL}/#/dashboard?id=${userId}`);
-      // res.json([
-      //   {
-      //     data: "success"
-      //   }
-      // ]);
-      // res.status(301).redirect(`${url.REDIRECT_URL}/dashboard`);
     }
   );
 };
