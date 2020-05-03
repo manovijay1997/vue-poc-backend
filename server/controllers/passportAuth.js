@@ -24,7 +24,7 @@ passport.use(
         SocialAuthUserDetails.find(
           { socialID: Number(profile.id) },
           (err, data) => {
-            if (data.length !== 0) {
+            if (data.length != 0) {
               console.log("profile id ", data);
               return done(err, profile);
             } else {
